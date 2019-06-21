@@ -2,7 +2,7 @@
 
 A simple script to update gpg keys for packages.ros.org
 
-detailes: https://discourse.ros.org/t/new-gpg-keys-deployed-for-packages-ros-org/9454
+details: https://discourse.ros.org/t/new-gpg-keys-deployed-for-packages-ros-org/9454
 
 ## Usage
 
