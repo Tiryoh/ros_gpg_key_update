@@ -11,8 +11,15 @@ fi
 # APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | sudo apt-key add -
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 # update the sources.list
-sudo sed -i -e "s#deb \[arch=$(dpkg --print-architecture)\] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros2-latest.list
-sudo sed -i -e "s#deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros2-latest.list
-sudo sed -i -e "s#deb http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros-latest.list
+# ROS 2
+if [ -e /etc/apt/sources.list.d/ros2-latest.list ]; then
+	sudo sed -i -e "s#deb \[arch=$(dpkg --print-architecture)\] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros2-latest.list
+	sudo sed -i -e "s#deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros2-latest.list
+fi
+
+# ROS 1
+if [ -e /etc/apt/sources.list.d/ros-latest.list ]; then
+	sudo sed -i -e "s#deb http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros-latest.list
+fi
 
 echo "ROS GPG key has been successfully updated. Run 'apt update'."
