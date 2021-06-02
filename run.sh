@@ -20,6 +20,8 @@ fi
 # ROS 1
 if [ -e /etc/apt/sources.list.d/ros-latest.list ]; then
 	sudo sed -i -e "s#deb http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros-latest.list
+elif [ -e /etc/apt/sources.list.d/ros1-latest.list ]; then
+	sudo sed -i -e "s#deb http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros1-latest.list
 fi
 
 echo "ROS GPG key has been successfully updated. Run 'apt update'."
