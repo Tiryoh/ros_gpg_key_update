@@ -13,7 +13,7 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o
 # update the sources.list
 # ROS 2
 if [ -e /etc/apt/sources.list.d/ros2-latest.list ]; then
-	sudo sed -i -e "s#deb \[arch=$(dpkg --print-architecture)\] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros2-latest.list
+	sudo sed -i -e "s#deb \[arch=\(.*\)\] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#deb [arch=\1 signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros2-latest.list
 	sudo sed -i -e "s#deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main#g" /etc/apt/sources.list.d/ros2-latest.list
 fi
 
