@@ -4,13 +4,15 @@ set -eu
 ### delete old keys ###
 # delete old key used before June 2019
 OLD_KEY_REGEX_2019='421C[[:space:]]*365B[[:space:]]*D9FF[[:space:]]*1F71[[:space:]]*7815[[:space:]]*A389[[:space:]]*5523[[:space:]]*BAEE[[:space:]]*B01F[[:space:]]*A116|421C365BD9FF1F717815A3895523BAEEB01FA116'
-if [[ $(APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key list | grep -q -E "${OLD_KEY_REGEX_2019}") ]]; then
+if APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key list | grep -q -E "${OLD_KEY_REGEX_2019}"; then
+	echo "deleting old key used before June 2019"
 	sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 	sudo apt-key del 421C365BD9FF1F717815A3895523BAEEB01FA116
 fi
 # delete old key expired in May 2025
 OLD_KEY_REGEX_2025='C1CF[[:space:]]*6E31[[:space:]]*E6BA[[:space:]]*DE88[[:space:]]*68B1[[:space:]]*72B4[[:space:]]*F42E[[:space:]]*D6FB[[:space:]]*AB17[[:space:]]*C654|C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654'
-if [[ $(APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key list | grep -q -E "${OLD_KEY_REGEX_2025}") ]]; then
+if APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key list | grep -q -E "${OLD_KEY_REGEX_2025}"; then
+	echo "deleting old key expired in May 2025"
 	sudo apt-key del C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 fi
 
